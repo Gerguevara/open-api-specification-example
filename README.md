@@ -37,3 +37,4 @@ The main purpose of this project is to provide a simple example that demonstrate
    ```bash
    git clone https://github.com/your-username/swagger-openapi-demo.git
    cd swagger-openapi-demo
+# open-api-specification-example
