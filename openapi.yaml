@@ -1,8 +1,28 @@
 openapi: 3.1.1
 info:
   title: Api first
-  description: A sample API to illustrate OpenAPI concepts
+  description: |-
+    This is a sample FakeAPI Store Server based on the OpenAPI 3.X specification. You can find out more about Swagger at https://swagger.io. In the third iteration of the pet store, we've switched to the design first approach. You can now help us improve the API whether it's by making changes to the definition itself or to the code. That way, with time, we can improve the API in general, and expose some of the new features in OAS3.
+    
+    Some useful links:
+    - [The Fake Store repository](https://github.com/platzi/curso-apifirst)
   version: 1.0.0
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  contact:
+    name: API Support
+    email: support@example.com
+    url: https://example.com/support
+tags:
+  - name: Hello
+    description: Greeting operations
+  - name: Auth
+    description: Authentication operations
+  - name: Users
+    description: Operations about users
+  - name: Products
+    description: Operations about products
 servers:
   - url: http://localhost:3000/v1
     description: Local server
@@ -84,6 +104,31 @@ components:
         - name
         - email
         - age
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: demo@gmail.com
+        password:
+          type: string
+          example: password123
+          minLength: 6
+      required:
+        - email
+        - password
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        user:
+          $ref: '#/components/schemas/User'
+      required:
+        - token
+        - user
     UserInput:
       type: object
       properties:
@@ -121,9 +166,56 @@ components:
           type: string
       required:
         - message
+  securitySchemes:
+   JWT:
+     type: http
+     scheme: bearer
+     bearerFormat: JWT
+     description: JSON Web Token authentication
+security:
+  - JWT: []
 paths:
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Authenticate user and return JWT token
+      security: []  # This endpoint doesn't require authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Error'
+                  - example:
+                      message: Invalid email or password
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Error'
+                  - example:
+                      message: Email and password are required
   /hello:
     get:
+      tags:
+        - Hello
       summary: Returns a greeting message
       responses:
         '200':
@@ -134,6 +226,8 @@ paths:
                 $ref: '#/components/schemas/Greeting'
   /users:
     post:
+      tags:
+        - Users
       summary: Create a new user
       requestBody:
         required: true
@@ -159,6 +253,8 @@ paths:
                       message: Invalid user data
   /users/{id}:
     get:
+      tags:
+        - Users
       summary: Get user by ID
       parameters:
         - in: path
@@ -193,6 +289,8 @@ paths:
                   - example:
                       message: User not found
     put:
+      tags:
+        - Users
       summary: Update user by ID
       parameters:
         - in: path
@@ -233,6 +331,8 @@ paths:
                   - example:
                       message: User not found
     delete:
+      tags:
+        - Users
       summary: Delete user by ID
       parameters:
         - in: path
@@ -264,6 +364,8 @@ paths:
                       message: User not found
   /products:
     get:
+      tags:
+        - Products
       summary: Get all products
       responses:
         '200':
@@ -275,6 +377,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/Products'
     post:
+      tags:
+        - Products
       summary: Create a new product
       requestBody:
         required: true
@@ -300,6 +404,8 @@ paths:
                       message: Invalid product data
   /products/{id}:
     get:
+      tags:
+        - Products
       summary: Get product by ID
       parameters:
         - in: path
@@ -325,6 +431,8 @@ paths:
                   - example:
                       message: Product not found
     put:
+      tags:
+        - Products
       summary: Update product by ID
       parameters:
         - in: path
@@ -365,6 +473,8 @@ paths:
                   - example:
                       message: Product not found
     delete:
+      tags:
+        - Products
       summary: Delete product by ID
       parameters:
         - in: path
@@ -385,3 +495,8 @@ paths:
                   - $ref: '#/components/schemas/Error'
                   - example:
                       message: Product not found
+
+
+
+# tools
+# https://editor.swagger.io/
