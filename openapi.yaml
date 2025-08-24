@@ -5,7 +5,7 @@ info:
     This is a sample FakeAPI Store Server based on the OpenAPI 3.X specification. You can find out more about Swagger at https://swagger.io. In the third iteration of the pet store, we've switched to the design first approach. You can now help us improve the API whether it's by making changes to the definition itself or to the code. That way, with time, we can improve the API in general, and expose some of the new features in OAS3.
     
     Some useful links:
-    - [The Fake Store repository](https://github.com/platzi/curso-apifirst)
+    - [The Fake Store repository](https://github.com/Gerguevara/open-api-specification-example)
   version: 1.0.0
   license:
     name: MIT
