@@ -18,10 +18,20 @@ The main purpose of this project is to provide a simple example that demonstrate
 ---
 
 ## 📂 Project Structure
-├── openapi.yml # Main OpenAPI specification
-├── src/ # Example source code (Node.js/Nest/Express depending on setup)
-└── README.md # Project documentation
-
+├── src
+│ ├── middleware
+│ │ └── auth.js
+│ ├── routes
+│ │ ├── v1
+│ │ ├── v2
+│ │ └── index.js
+│ └── index.js
+├── .gitignore
+├── AUTH_README.md
+├── openapi.yaml
+├── package-lock.json
+├── package.json
+└── README.md
 
 ---
 
@@ -35,6 +45,6 @@ The main purpose of this project is to provide a simple example that demonstrate
 ## ▶️ Getting Started
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/swagger-openapi-demo.git
-   cd swagger-openapi-demo
+   git clonegit@github.com:Gerguevara/open-api-specification-example.git
+   cd open-api-specification-example
 # open-api-specification-example
