@@ -14,25 +14,6 @@ The main purpose of this project is to provide a simple example that demonstrate
 - Swagger UI integration to generate interactive documentation.
 - Example models and endpoints for demonstration purposes.
 - Options to explore validation rules, request/response schemas, and error handling.
-
----
-
-## 📂 Project Structure
-├── src
-│ ├── middleware
-│ │ └── auth.js
-│ ├── routes
-│ │ ├── v1
-│ │ ├── v2
-│ │ └── index.js
-│ └── index.js
-├── .gitignore
-├── AUTH_README.md
-├── openapi.yaml
-├── package-lock.json
-├── package.json
-└── README.md
-
 ---
 
 ## 📖 Requirements
